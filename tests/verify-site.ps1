@@ -20,3 +20,15 @@ if (-not (Test-Path (Join-Path $siteRoot 'robots.txt'))) {
 if (-not (Test-Path (Join-Path $siteRoot 'sitemap.xml'))) {
   throw 'sitemap.xml is missing.'
 }
+
+$requiredPublicationResources = @(
+  'https://dl.acm.org/doi/10.65109/VJGN3439',
+  'https://arxiv.org/abs/2602.11735',
+  'https://ieeexplore.ieee.org/document/11348538/'
+)
+
+foreach ($resource in $requiredPublicationResources) {
+  if ($html -notmatch [regex]::Escape($resource)) {
+    throw "Publication resource is missing: $resource"
+  }
+}
