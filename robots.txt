@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wanhao-liu.github.io/sitemap.xml
