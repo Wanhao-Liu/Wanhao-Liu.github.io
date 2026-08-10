@@ -1,67 +1,57 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { Github, GraduationCap, Mail } from 'lucide-react';
+import { BookOpen, Microscope, Newspaper, UserRound } from 'lucide-react';
 import type { Locale, AboutContent, NewsItem } from '@/lib/siteContent';
 import type { Publication } from '@/types/publication';
 import { getLabels } from '@/lib/labels';
 import PublicationList from '@/components/publications/PublicationList';
+import ProfileSidebar from '@/components/home/ProfileSidebar';
 
 export default function AcademicHome({ locale, about, news, publications }: { locale: Locale; about: AboutContent; news: NewsItem[]; publications: Publication[] }) {
   const labels = getLabels(locale);
+  const zh = locale === 'zh';
+  const researchThemes = zh ? [
+    ['具身智能与机器人学习', '视觉-语言-动作模型、世界动作模型与视觉运动控制'],
+    ['医疗机器人', '手术视频预测、具身内窥镜导航与机器人辅助介入'],
+    ['鲁棒自主系统', '多智能体强化学习、无人机协同与容错控制'],
+  ] : [
+    ['Embodied Intelligence and Robot Learning', 'Vision-Language-Action models, world-action models, and visuomotor control'],
+    ['Medical Robotics', 'Surgical video prediction, grounded endoscopic navigation, and robot-assisted intervention'],
+    ['Robust Autonomous Systems', 'Multi-agent reinforcement learning, UAV coordination, and fault-tolerant control'],
+  ];
+  const timeline = [
+    ...about.experience.map((item) => ({ period: item.period, institution: item.institution, role: item.role ?? item.detail })),
+    ...about.education.map((item) => ({ period: item.period, institution: item.institution, role: item.degree ?? item.detail })),
+  ];
+
   return (
-    <div className="page-shell">
-      <section className="profile-section">
-        <div className="portrait-wrap">
-          <Image src="/images/LWH.jpg" alt="Wanhao Liu" fill priority sizes="220px" />
-        </div>
-        <div className="profile-copy">
-          <p className="role">Robotics Researcher · 机器人研究者</p>
-          <h1>Wanhao Liu <span>刘皖皓</span></h1>
-          <p>{about.intro}</p>
-          <p>{about.research}</p>
-          <div className="profile-links">
-            <Link href="mailto:liuwanhao@mails.gdut.edu.cn"><Mail size={15} />Email</Link>
-            <Link href="https://scholar.google.com/citations?hl=en&user=zaRHAjgAAAAJ" target="_blank"><GraduationCap size={15} />Google Scholar</Link>
-            <Link href="https://github.com/Wanhao-Liu" target="_blank"><Github size={15} />GitHub</Link>
-          </div>
-        </div>
-      </section>
+    <div className="home-shell">
+      <div className="home-grid">
+        <ProfileSidebar locale={locale} />
+        <div className="home-content">
+          <section id="about" className="home-section">
+            <h2><UserRound />{labels.about}</h2>
+            <div className="about-copy"><p>{about.intro}</p><p>{about.research}</p></div>
+            <ol className="compact-timeline">
+              {timeline.map((item) => <li key={`${item.institution}-${item.period}`}><span className="timeline-dot" /><time>{item.period}</time><strong>{item.institution}</strong><span>{item.role}</span></li>)}
+            </ol>
+          </section>
 
-      <section className="content-section">
-        <h2>{labels.researchInterests}</h2>
-        <ul className="interest-list">{about.interests.map((interest) => <li key={interest}>{interest}</li>)}</ul>
-      </section>
+          <section id="research" className="home-section">
+            <div className="home-section-heading"><h2><Microscope />{labels.researchInterests}</h2><Link href="https://scholar.google.com/citations?hl=en&user=zaRHAjgAAAAJ" target="_blank">{zh ? '查看详情 →' : 'View Details →'}</Link></div>
+            <ul className="research-theme-list">{researchThemes.map(([title, description]) => <li key={title}><strong>{title}</strong><span> — {description}</span></li>)}</ul>
+          </section>
 
-      <section className="content-section timeline-grid">
-        <div>
-          <h2>{labels.education}</h2>
-          {about.education.map((item) => (
-            <div className="timeline-item" key={`${item.institution}-${item.period}`}>
-              <div><strong>{item.institution}</strong><span>{item.period}</span></div>
-              <p>{item.degree}</p><small>{item.detail}</small>
-            </div>
-          ))}
+          <section id="news" className="home-section">
+            <h2><Newspaper />{labels.news}</h2>
+            <div className="news-list">{news.map((item) => <div key={`${item.date}-${item.content}`}><time>{item.date}</time><p>{item.content}</p></div>)}</div>
+          </section>
+
+          <section id="selected-publications" className="home-section home-publications">
+            <div className="home-section-heading"><h2><BookOpen />{labels.selectedPublications}</h2><Link href={`/${locale}/publications/`}>{labels.viewAll}</Link></div>
+            <PublicationList publications={publications.filter((publication) => publication.selected)} locale={locale} compact />
+          </section>
         </div>
-        <div>
-          <h2>{labels.experience}</h2>
-          {about.experience.map((item) => (
-            <div className="timeline-item" key={`${item.institution}-${item.period}`}>
-              <div><strong>{item.role}, {item.institution}</strong><span>{item.period}</span></div>
-              <p>{item.detail}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="content-section">
-        <h2>{labels.news}</h2>
-        <div className="news-list">{news.map((item) => <div key={`${item.date}-${item.content}`}><time>{item.date}</time><p>{item.content}</p></div>)}</div>
-      </section>
-
-      <section className="content-section publications-section">
-        <div className="section-heading-row"><h2>{labels.selectedPublications}</h2><Link href={`/${locale}/publications/`}>{labels.viewAll}</Link></div>
-        <PublicationList publications={publications.filter((publication) => publication.selected)} locale={locale} compact />
-      </section>
+      </div>
     </div>
   );
 }
