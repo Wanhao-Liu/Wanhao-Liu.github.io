@@ -6,6 +6,14 @@ import { getLabels } from '@/lib/labels';
 import PublicationList from '@/components/publications/PublicationList';
 import ProfileSidebar from '@/components/home/ProfileSidebar';
 
+const selectedPublicationOrder = [
+  'liu2026crossscope',
+  'liu2026acmasac',
+  'zhou2026surguniworld',
+  'pan2026ncgr',
+  'lin2026endowam',
+];
+
 export default function AcademicHome({ locale, about, news, publications }: { locale: Locale; about: AboutContent; news: NewsItem[]; publications: Publication[] }) {
   const labels = getLabels(locale);
   const zh = locale === 'zh';
@@ -22,6 +30,13 @@ export default function AcademicHome({ locale, about, news, publications }: { lo
     ...about.experience.map((item) => ({ period: item.period, institution: item.institution, role: item.role ?? item.detail, detail: item.detail })),
     ...about.education.map((item) => ({ period: item.period, institution: item.institution, role: item.degree ?? item.detail, detail: item.detail })),
   ];
+  const selectedPublications = publications
+    .filter((publication) => publication.selected)
+    .sort((left, right) => {
+      const leftRank = selectedPublicationOrder.indexOf(left.id);
+      const rightRank = selectedPublicationOrder.indexOf(right.id);
+      return (leftRank === -1 ? Number.MAX_SAFE_INTEGER : leftRank) - (rightRank === -1 ? Number.MAX_SAFE_INTEGER : rightRank);
+    });
 
   return (
     <div className="home-shell">
@@ -48,7 +63,7 @@ export default function AcademicHome({ locale, about, news, publications }: { lo
 
           <section id="selected-publications" className="home-section home-publications">
             <div className="home-section-heading"><h2><BookOpen />{labels.selectedPublications}</h2><Link href={`/${locale}/publications/`}>{labels.viewAll}</Link></div>
-            <PublicationList publications={publications.filter((publication) => publication.selected)} locale={locale} compact />
+            <PublicationList publications={selectedPublications} locale={locale} compact />
           </section>
         </div>
       </div>
