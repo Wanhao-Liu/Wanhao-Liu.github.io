@@ -2,7 +2,7 @@ import type { Locale } from '@/lib/siteContent';
 
 const labels = {
   en: {
-    about: 'About', publications: 'Selected Publications', projects: 'Projects', cv: 'CV',
+    about: 'About', publications: 'Publications', projects: 'Projects', cv: 'CV',
     researchInterests: 'Research Interests', education: 'Education', experience: 'Experience',
     news: 'Recent News', selectedPublications: 'Selected Publications', viewAll: 'View all publications',
     equal: 'Equal contribution', corresponding: 'Corresponding author', abstract: 'Abstract',

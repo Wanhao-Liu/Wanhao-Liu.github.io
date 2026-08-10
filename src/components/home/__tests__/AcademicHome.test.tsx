@@ -52,8 +52,8 @@ describe('AcademicHome', () => {
       'CrossScope: A Role-Asymmetric World Model for Joint Dual-Scope Surgical Video Prediction',
       'AC-MASAC: An Attentive Curriculum Learning Framework for Heterogeneous UAV Swarm Coordination',
       'Surg-UniWorld: A Unified Surgical World Model with Multimodal Control Experts',
-      'NCGR: Noise-Conditional Gated Rectification for Camera Extrinsic Perturbations in BEV 3D Object Detection',
       'EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation',
     ]);
+    expect(titles).not.toContain('NCGR: Noise-Conditional Gated Rectification for Camera Extrinsic Perturbations in BEV 3D Object Detection');
   });
 });

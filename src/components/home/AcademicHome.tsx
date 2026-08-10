@@ -10,7 +10,6 @@ const selectedPublicationOrder = [
   'liu2026crossscope',
   'liu2026acmasac',
   'zhou2026surguniworld',
-  'pan2026ncgr',
   'lin2026endowam',
 ];
 
@@ -31,7 +30,7 @@ export default function AcademicHome({ locale, about, news, publications }: { lo
     ...about.education.map((item) => ({ period: item.period, institution: item.institution, role: item.degree ?? item.detail, detail: item.detail })),
   ];
   const selectedPublications = publications
-    .filter((publication) => publication.selected)
+    .filter((publication) => publication.selected && selectedPublicationOrder.includes(publication.id))
     .sort((left, right) => {
       const leftRank = selectedPublicationOrder.indexOf(left.id);
       const rightRank = selectedPublicationOrder.indexOf(right.id);

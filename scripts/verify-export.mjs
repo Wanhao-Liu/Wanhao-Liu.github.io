@@ -34,6 +34,10 @@ for (const signal of [
 ]) {
   if (!english.includes(signal)) throw new Error(`English homepage missing: ${signal}`);
 }
+if (!english.includes('<a href="/en/publications/">Publications</a>')) throw new Error('English navigation is not labeled Publications.');
+if (english.includes('NCGR: Noise-Conditional Gated Rectification for Camera Extrinsic Perturbations in BEV 3D Object Detection')) {
+  throw new Error('NCGR must not appear in the homepage selected publications.');
+}
 for (const signal of ['刘皖皓', '研究方向', '/zh/publications/', '/en/']) {
   if (!chinese.includes(signal)) throw new Error(`Chinese homepage missing: ${signal}`);
 }
