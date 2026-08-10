@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FileText, Github, GraduationCap, Mail } from 'lucide-react';
 import type { Locale } from '@/lib/siteContent';
+import VisitorPanel from '@/components/home/VisitorPanel';
 
 export default function ProfileSidebar({ locale }: { locale: Locale }) {
   const zh = locale === 'zh';
@@ -22,6 +23,7 @@ export default function ProfileSidebar({ locale }: { locale: Locale }) {
         <Link href="https://github.com/Wanhao-Liu" target="_blank" aria-label="GitHub" title="GitHub"><Github /></Link>
         <Link href="/cv/Wanhao_Liu_CV.pdf" target="_blank" aria-label={zh ? '简历' : 'Curriculum Vitae'} title={zh ? '简历' : 'Curriculum Vitae'}><FileText /></Link>
       </div>
+      <VisitorPanel locale={locale} />
     </aside>
   );
 }
