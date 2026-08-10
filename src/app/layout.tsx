@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Wanhao Liu Academic Homepage',
-    images: [{ url: '/images/LWH.jpg', width: 800, height: 800, alt: 'Wanhao Liu' }],
+    images: [{ url: '/images/LWH-2026.jpg', width: 800, height: 800, alt: 'Wanhao Liu' }],
   },
   icons: { icon: '/images/Agent.png' },
 };

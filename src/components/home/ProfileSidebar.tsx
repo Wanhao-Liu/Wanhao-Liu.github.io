@@ -10,7 +10,7 @@ export default function ProfileSidebar({ locale }: { locale: Locale }) {
   return (
     <aside className="profile-sidebar" aria-label={zh ? '刘皖皓个人资料' : 'Wanhao Liu profile'}>
       <div className="sidebar-portrait">
-        <Image src="/images/LWH.jpg" alt={zh ? '刘皖皓' : 'Wanhao Liu'} fill priority sizes="256px" />
+        <Image src="/images/LWH-2026.jpg" alt={zh ? '刘皖皓' : 'Wanhao Liu'} fill priority sizes="256px" />
       </div>
       <div className="sidebar-identity">
         <h1>{zh ? '刘皖皓' : 'Wanhao Liu'}</h1>
