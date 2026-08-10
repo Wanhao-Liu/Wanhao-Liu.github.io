@@ -1,0 +1,4 @@
+type = "publication"
+title = "Publications"
+description = "Research publications by Wanhao Liu."
+source = "publications.bib"

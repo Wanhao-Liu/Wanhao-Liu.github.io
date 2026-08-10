@@ -2,9 +2,14 @@ _site
 ./_site
 # Ignore compiled and generated files
 node_modules/
+.next/
+/out/
+/tmp/
+.worktrees/
 dist/
 build/
 *.log
+*.tsbuildinfo
 npm-debug.log*
 
 # Ignore local development files
@@ -30,12 +35,6 @@ Gemfile.lock
 .sass-cache/
 .jekyll-plugins/
 .jekyll-versions/
-
-# Ignore test and documentation files
-/_tests/
-/docs/
-*.md
-
 
 vendor/
 .bundle/

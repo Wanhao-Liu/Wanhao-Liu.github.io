@@ -1,0 +1,7 @@
+[[projects]]
+title = "Smart Car Race"
+period = "Jun 2025 - Sep 2025"
+image = "/images/smartcarrace/car.png"
+url = "https://github.com/TXmonky/smartcarrace"
+award = "National Second Prize"
+description = "A data-driven autonomous vehicle built on Jetson Orin Nano. The system combines CNN and PP-YOLOE perception, multi-sensor fusion, robotic-arm planning, and ROS-based real-time control."

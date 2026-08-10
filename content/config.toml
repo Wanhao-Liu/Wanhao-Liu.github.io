@@ -1,0 +1,57 @@
+[site]
+title = "Wanhao Liu"
+description = "Wanhao Liu researches embodied intelligence, robot learning, medical robotics, Vision-Language-Action models, and World-Action Models."
+favicon = "/images/Agent.png"
+last_updated = "August 2026"
+
+[author]
+name = "Wanhao Liu"
+title = "Robotics Researcher"
+institution = "Guangdong University of Technology"
+avatar = "/images/LWH.jpg"
+
+[social]
+email = "liuwanhao@mails.gdut.edu.cn"
+google_scholar = "https://scholar.google.com/citations?hl=en&user=zaRHAjgAAAAJ"
+github = "https://github.com/Wanhao-Liu"
+
+[features]
+enable_likes = false
+enable_one_page_mode = false
+
+[i18n]
+enabled = true
+locales = ["en", "zh"]
+default_locale = "en"
+mode = "fixed"
+fixed_locale = "en"
+persist = true
+switcher = true
+
+[i18n.labels]
+en = "EN"
+zh = "中文"
+
+[[navigation]]
+title = "About"
+type = "page"
+target = "about"
+href = "/en/"
+
+[[navigation]]
+title = "Publications"
+type = "page"
+target = "publications"
+href = "/en/publications/"
+
+[[navigation]]
+title = "Projects"
+type = "page"
+target = "projects"
+href = "/en/projects/"
+
+[[navigation]]
+title = "CV"
+type = "link"
+target = "cv"
+href = "/cv/Wanhao_Liu_CV.pdf"

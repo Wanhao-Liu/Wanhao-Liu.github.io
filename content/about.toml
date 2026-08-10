@@ -1,0 +1,21 @@
+intro = "I am a B.Eng. student in Electronic Science and Technology at Guangdong University of Technology, advised by Prof. Panshuo Li. I am also a Research Assistant at The Chinese University of Hong Kong, working with Prof. Hongliang Ren."
+research = "My research lies at the intersection of embodied intelligence, robot learning, and medical robot autonomy. I develop Vision-Language-Action and World-Action Models that connect multimodal perception, predictive world modeling, and visuomotor control for robust robotic decision-making. My current work focuses on surgical video prediction, grounded endoscopic navigation, and executable world-action modeling for robot-assisted endoscopic intervention."
+interests = ["Embodied Intelligence", "Robot Learning", "Medical Robotics", "Vision-Language-Action Models", "World-Action Models", "Visuomotor Control"]
+
+[[education]]
+institution = "Guangdong University of Technology"
+degree = "B.Eng. in Electronic Science and Technology"
+period = "2023 - 2027"
+detail = "GPA: 88.20/100; Rank: 9/221"
+
+[[experience]]
+role = "Research Assistant"
+institution = "The Chinese University of Hong Kong"
+period = "Jan 2026 - Present"
+detail = "Executable world-action modeling for robot-assisted endoscopic intervention, advised by Prof. Hongliang Ren."
+
+[[experience]]
+role = "Research Assistant"
+institution = "Guangdong University of Technology"
+period = "Nov 2024 - Oct 2025"
+detail = "Multi-agent reinforcement learning for heterogeneous UAV coordination and prescribed-time fault-tolerant control, advised by Prof. Panshuo Li."

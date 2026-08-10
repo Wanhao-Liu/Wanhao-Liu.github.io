@@ -1,0 +1,48 @@
+{
+  "name": "wanhao-liu-homepage",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build && node scripts/postprocess-export.mjs",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --pool=threads --maxWorkers=1",
+    "test:watch": "vitest",
+    "validate:content": "node scripts/validate-content.mjs",
+    "verify:export": "node scripts/verify-export.mjs",
+    "verify": "npm run test && npm run validate:content && npm run lint && npm run typecheck && npm run build && npm run verify:export"
+  },
+  "dependencies": {
+    "@retorquere/bibtex-parser": "^10.0.0",
+    "lucide-react": "^0.515.0",
+    "next": "16.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "smol-toml": "^1.7.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.0",
+    "jsdom": "^29.1.1",
+    "lightningcss": "^1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5",
+    "vitest": "^4.1.10"
+  },
+  "optionalDependencies": {
+    "lightningcss-linux-x64-gnu": "^1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

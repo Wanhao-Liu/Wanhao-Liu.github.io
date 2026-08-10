@@ -1,0 +1,7 @@
+[[projects]]
+title = "全国大学生智能汽车竞赛"
+period = "2025年6月 - 2025年9月"
+image = "/images/smartcarrace/car.png"
+url = "https://github.com/TXmonky/smartcarrace"
+award = "全国二等奖"
+description = "基于 Jetson Orin Nano 构建的数据驱动智能车系统，结合 CNN 与 PP-YOLOE 感知、多传感器融合、机械臂规划和基于 ROS 的实时控制。"

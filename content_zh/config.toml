@@ -1,0 +1,33 @@
+[site]
+title = "刘皖皓"
+description = "刘皖皓的个人学术主页，研究方向包括具身智能、机器人学习、医疗机器人、视觉-语言-动作模型与世界动作模型。"
+last_updated = "2026年8月"
+
+[author]
+name = "刘皖皓"
+title = "机器人研究者"
+institution = "广东工业大学"
+
+[[navigation]]
+title = "关于"
+type = "page"
+target = "about"
+href = "/zh/"
+
+[[navigation]]
+title = "论文"
+type = "page"
+target = "publications"
+href = "/zh/publications/"
+
+[[navigation]]
+title = "项目"
+type = "page"
+target = "projects"
+href = "/zh/projects/"
+
+[[navigation]]
+title = "简历"
+type = "link"
+target = "cv"
+href = "/cv/Wanhao_Liu_CV.pdf"
