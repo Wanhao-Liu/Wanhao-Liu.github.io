@@ -201,6 +201,28 @@
 <table width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
 
   <tr>
+    <td width="40%" valign="top" align="center"><div class="publication-media">
+    <video controls autoplay loop muted playsinline preload="metadata" aria-label="Surg-UniWorld project demonstration">
+      <source src="https://surg-uniworld.pages.dev/videos/control-modalities-model-comparison.mp4" type="video/mp4">
+    </video>
+    </div></td>
+    <td width="60%" valign="top">
+      <p><a href="https://arxiv.org/abs/2608.06770" id="SURGUNIWORLD">
+      <heading>Surg-UniWorld: A Unified Surgical World Model with Multimodal Control Experts</heading></a><br>
+      Rulin Zhou, <b>Wanhao Liu</b>, Guoheng Ma, Liangjin Shao, Qiujie Song, Yidu Wang, Guankun Wang, Tong Chen, Long Bai, Luping Zhou, Hongliang Ren<br>
+      2026 <i>arXiv preprint</i><br>
+      </p>
+      <div class="paper" id="surguniworld">
+      <a href="https://surg-uniworld.pages.dev/">webpage</a> |
+      <a href="https://arxiv.org/pdf/2608.06770">pdf</a> |
+      <a href="javascript:toggleblock('surguniworld_abs')">abstract</a> |
+      <a href="https://arxiv.org/abs/2608.06770">arXiv</a>
+      <p align="justify"><i id="surguniworld_abs">Controllable surgical world models can provide a generative foundation for surgical artificial intelligence and simulation by synthesizing realistic instrument--tissue interactions. However, existing methods lack a unified multimodal control paradigm, while direct fusion of heterogeneous visual conditions often causes anatomical distortion, instrument appearance drift, and temporally inconsistent interactions. In this work, we propose Surg-UniWorld, a unified surgical world model with multimodal control experts. Surg-UniWorld first constructs a Hierarchical Surgical Anchor from first-frame appearance and hierarchical semantic masks to preserve persistent scene identity, anatomical organization, and interaction boundaries. Anchor-Relative Modality Experts then interpret edge, depth, and optical-flow evidence relative to the shared anchor, capturing complementary boundary, geometric, and motion information. A Multimodal Control Expert further performs contribution-preserving stage-wise composition of the activated modality increments and generates control hints for the Wan2.2 video diffusion backbone. To support multimodal surgical world modeling, we further construct Cholec80-SurgWAM, a benchmark for controllable surgical video generation. Extensive experiments demonstrate that Surg-UniWorld consistently outperforms existing controllable video generation methods and surgical world-model baselines in generation quality, temporal consistency, and multimodal controllability.</i></p>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
     <td width="40%" valign="top" align="center"><div class="publication-media"><a href="https://arxiv.org/abs/2608.03895">
     <img src="images/NCGR/pipeline.png" alt="NCGR pipeline overview">
     </a></div></td>
