@@ -36,3 +36,11 @@ foreach ($resource in $requiredPublicationResources) {
     throw "Publication resource is missing: $resource"
   }
 }
+
+if ($html -notmatch [regex]::Escape("hideblock('surguniworld_abs');")) {
+  throw 'Surg-UniWorld abstract is not hidden on page load.'
+}
+
+if ($html -notmatch [regex]::Escape('Rulin Zhou<sup>*</sup>, <b>Wanhao Liu</b><sup>*</sup>')) {
+  throw 'Surg-UniWorld equal-contribution markers are missing.'
+}
