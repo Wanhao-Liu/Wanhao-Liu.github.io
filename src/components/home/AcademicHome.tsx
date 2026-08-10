@@ -19,8 +19,8 @@ export default function AcademicHome({ locale, about, news, publications }: { lo
     ['Robust Autonomous Systems', 'Multi-agent reinforcement learning, UAV coordination, and fault-tolerant control'],
   ];
   const timeline = [
-    ...about.experience.map((item) => ({ period: item.period, institution: item.institution, role: item.role ?? item.detail })),
-    ...about.education.map((item) => ({ period: item.period, institution: item.institution, role: item.degree ?? item.detail })),
+    ...about.experience.map((item) => ({ period: item.period, institution: item.institution, role: item.role ?? item.detail, detail: item.detail })),
+    ...about.education.map((item) => ({ period: item.period, institution: item.institution, role: item.degree ?? item.detail, detail: item.detail })),
   ];
 
   return (
@@ -32,7 +32,7 @@ export default function AcademicHome({ locale, about, news, publications }: { lo
             <h2><UserRound />{labels.about}</h2>
             <div className="about-copy"><p>{about.intro}</p><p>{about.research}</p></div>
             <ol className="compact-timeline">
-              {timeline.map((item) => <li key={`${item.institution}-${item.period}`}><span className="timeline-dot" /><time>{item.period}</time><strong>{item.institution}</strong><span>{item.role}</span></li>)}
+              {timeline.map((item) => <li key={`${item.institution}-${item.period}`}><span className="timeline-dot" /><time>{item.period}</time><strong>{item.institution}</strong><span>{item.role}</span><small className="timeline-detail">{item.detail}</small></li>)}
             </ol>
           </section>
 

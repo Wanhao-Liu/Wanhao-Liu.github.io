@@ -19,7 +19,17 @@ const publications = fs.readFileSync(path.join(root, 'out', 'en', 'publications'
 const chinesePublications = fs.readFileSync(path.join(root, 'out', 'zh', 'publications', 'index.html'), 'utf8');
 const sitemap = fs.readFileSync(path.join(root, 'out', 'sitemap.xml'), 'utf8');
 
-for (const signal of ['Wanhao Liu', '/en/publications/', '/zh/', 'hrefLang="zh-CN"']) {
+for (const signal of [
+  'Wanhao Liu',
+  '/en/publications/',
+  '/zh/',
+  'hrefLang="zh-CN"',
+  'https://wanhao.goatcounter.com/count',
+  'Visitors',
+  'visitor-map',
+  'id="about"',
+  'Selected Publications',
+]) {
   if (!english.includes(signal)) throw new Error(`English homepage missing: ${signal}`);
 }
 for (const signal of ['刘皖皓', '研究方向', '/zh/publications/', '/en/']) {

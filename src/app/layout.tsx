@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import GoatCounterScript from '@/components/analytics/GoatCounterScript';
 import './globals.css';
 
 const siteUrl = 'https://wanhao-liu.github.io';
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head>
-      <body>{children}<script data-goatcounter="https://wanhao.goatcounter.com/count" async src="https://gc.zgo.at/count.js" /></body>
+      <body>{children}<GoatCounterScript /></body>
     </html>
   );
 }

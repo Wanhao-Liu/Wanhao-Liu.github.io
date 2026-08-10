@@ -3,9 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 type LeafletMap = { remove: () => void; zoomControl: { setPosition: (position: string) => void } };
+type LeafletTileLayer = {
+  addTo: (map: LeafletMap) => LeafletTileLayer;
+  on: (event: 'load' | 'tileerror', handler: () => void) => LeafletTileLayer;
+};
 type LeafletApi = {
   map: (element: HTMLElement, options: Record<string, unknown>) => LeafletMap;
-  tileLayer: (url: string, options: Record<string, unknown>) => { addTo: (map: LeafletMap) => void };
+  tileLayer: (url: string, options: Record<string, unknown>) => LeafletTileLayer;
   circleMarker: (position: [number, number], options: Record<string, unknown>) => { addTo: (map: LeafletMap) => void };
 };
 
@@ -21,17 +25,25 @@ const markers: Array<[number, number]> = [
 
 let leafletPromise: Promise<LeafletApi> | null = null;
 
-function loadLeaflet() {
-  if (window.L) return Promise.resolve(window.L);
-  if (leafletPromise) return leafletPromise;
-  leafletPromise = new Promise<LeafletApi>((resolve, reject) => {
-    if (!document.querySelector('link[data-leaflet-css]')) {
-      const stylesheet = document.createElement('link');
+function loadLeafletStyles() {
+  return new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLLinkElement>('link[data-leaflet-css]');
+    if (existing?.dataset.loadState === 'ready' || existing?.sheet) return resolve();
+    const stylesheet = existing ?? document.createElement('link');
+    if (!existing) {
       stylesheet.rel = 'stylesheet';
       stylesheet.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
       stylesheet.dataset.leafletCss = 'true';
-      document.head.appendChild(stylesheet);
     }
+    stylesheet.addEventListener('load', () => { stylesheet.dataset.loadState = 'ready'; resolve(); }, { once: true });
+    stylesheet.addEventListener('error', () => reject(new Error('Leaflet styles failed to load')), { once: true });
+    if (!existing) document.head.appendChild(stylesheet);
+  });
+}
+
+function loadLeafletScript() {
+  if (window.L) return Promise.resolve(window.L);
+  return new Promise<LeafletApi>((resolve, reject) => {
     const existing = document.querySelector<HTMLScriptElement>('script[data-leaflet-js]');
     const script = existing ?? document.createElement('script');
     if (!existing) {
@@ -43,6 +55,16 @@ function loadLeaflet() {
     script.addEventListener('load', () => window.L ? resolve(window.L) : reject(new Error('Leaflet unavailable')), { once: true });
     script.addEventListener('error', () => reject(new Error('Leaflet failed to load')), { once: true });
   });
+}
+
+function loadLeaflet() {
+  if (leafletPromise) return leafletPromise;
+  leafletPromise = Promise.all([loadLeafletStyles(), loadLeafletScript()])
+    .then(([, leaflet]) => leaflet)
+    .catch((error) => {
+      leafletPromise = null;
+      throw error;
+    });
   return leafletPromise;
 }
 
@@ -71,10 +93,12 @@ export default function VisitorMap({ locale }: { locale: 'en' | 'zh' }) {
     loadLeaflet().then((leaflet) => {
       if (cancelled || !containerRef.current) return;
       map = leaflet.map(containerRef.current, { center: [24, 20], zoom: 1, scrollWheelZoom: false });
-      leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap', maxZoom: 19 }).addTo(map);
+      leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap', maxZoom: 19 })
+        .on('load', () => !cancelled && setStatus('ready'))
+        .on('tileerror', () => !cancelled && setStatus('error'))
+        .addTo(map);
       markers.forEach((marker) => leaflet.circleMarker(marker, { radius: 6, fillColor: '#2563eb', fillOpacity: 0.55, color: '#1d4ed8', weight: 1 }).addTo(map!));
       map.zoomControl.setPosition('topleft');
-      setStatus('ready');
     }).catch(() => !cancelled && setStatus('error'));
     return () => { cancelled = true; map?.remove(); };
   }, [visible]);

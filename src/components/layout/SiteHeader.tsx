@@ -12,21 +12,26 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const labels = getLabels(locale);
   const [open, setOpen] = useState(false);
-  const otherLocale = locale === 'en' ? 'zh' : 'en';
-  const alternatePath = pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${otherLocale}`);
-  const persistLocale = () => localStorage.setItem('locale', otherLocale);
+  const localePath = (targetLocale: Locale) => pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${targetLocale}`) || `/${targetLocale}/`;
+  const persistLocale = (targetLocale: Locale) => () => localStorage.setItem('locale', targetLocale);
   const links = [
     { href: `/${locale}/`, label: labels.about },
     { href: `/${locale}/publications/`, label: labels.publications },
     { href: `/${locale}/projects/`, label: labels.projects },
     { href: '/cv/Wanhao_Liu_CV.pdf', label: labels.cv, external: true },
   ];
+  const localeSwitch = (
+    <div className="locale-switch" aria-label={labels.language}>
+      <Link href={localePath('en')} className={locale === 'en' ? 'active' : undefined} aria-current={locale === 'en' ? 'page' : undefined} aria-label={locale === 'zh' ? labels.switchToEnglish : undefined} onClick={persistLocale('en')}>EN</Link>
+      <Link href={localePath('zh')} className={locale === 'zh' ? 'active' : undefined} aria-current={locale === 'zh' ? 'page' : undefined} aria-label={locale === 'en' ? labels.switchToChinese : undefined} onClick={persistLocale('zh')}>中文</Link>
+    </div>
+  );
 
   return (
     <header className="site-header">
       <div className="header-inner">
         <Link href={`/${locale}/`} className="site-name" onClick={() => setOpen(false)}>
-          Wanhao Liu <span>刘皖皓</span>
+          {locale === 'zh' ? '刘皖皓' : 'Wanhao Liu'}
         </Link>
         <nav className="desktop-nav" aria-label={labels.primaryNavigation}>
           {links.map((link) => (
@@ -39,17 +44,12 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
               {link.label}
             </Link>
           ))}
-          <Link href={alternatePath || `/${otherLocale}/`} aria-label={labels.language} className="language-link" onClick={persistLocale}>
-            {otherLocale === 'zh' ? '中文' : 'EN'}
-          </Link>
-          <ThemeButton label={labels.theme} />
+          <div className="nav-controls">{localeSwitch}<ThemeButton label={labels.theme} /></div>
         </nav>
         <div className="mobile-actions">
-          <Link href={alternatePath || `/${otherLocale}/`} aria-label={labels.language} className="language-link" onClick={persistLocale}>
-            {otherLocale === 'zh' ? '中文' : 'EN'}
-          </Link>
+          {localeSwitch}
           <ThemeButton label={labels.theme} />
-          <button className="icon-button" onClick={() => setOpen((value) => !value)} aria-label={labels.menu} aria-expanded={open}>
+          <button className="icon-button" onClick={() => setOpen((value) => !value)} aria-label={open ? labels.closeMenu : labels.menu} aria-expanded={open}>
             {open ? <X size={19} /> : <Menu size={19} />}
           </button>
         </div>

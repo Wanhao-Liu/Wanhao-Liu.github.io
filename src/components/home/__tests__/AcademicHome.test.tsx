@@ -21,5 +21,7 @@ describe('AcademicHome', () => {
     expect(screen.getByRole('heading', { name: 'Research Interests' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Recent News' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Selected Publications' })).toBeInTheDocument();
+    expect(screen.getByText('Medical robotics research')).toBeInTheDocument();
+    expect(screen.getByText('Electronic Science and Technology')).toBeInTheDocument();
   });
 });

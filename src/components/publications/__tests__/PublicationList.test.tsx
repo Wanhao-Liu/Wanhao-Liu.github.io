@@ -77,6 +77,22 @@ describe('PublicationList', () => {
     play.mockRestore();
   });
 
+  it('uses the poster at the homepage mobile breakpoint', async () => {
+    const matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query === '(max-width: 760px)',
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }));
+    vi.stubGlobal('matchMedia', matchMedia);
+
+    render(<PublicationList publications={[{ ...publication, video: 'https://example.com/demo.mp4' }]} locale="en" compact />);
+
+    expect(await screen.findByRole('img', { name: 'Demo World-Action Model overview' })).toBeInTheDocument();
+    expect(screen.queryByLabelText('Demo World-Action Model preview')).not.toBeInTheDocument();
+    expect(matchMedia).toHaveBeenCalledWith('(max-width: 760px)');
+    vi.unstubAllGlobals();
+  });
+
   it('waits until a video enters the viewport before playing', async () => {
     let notifyIntersection: ((entries: Array<{ isIntersecting: boolean }>) => void) | undefined;
     class IntersectionObserverMock {

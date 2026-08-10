@@ -19,7 +19,7 @@ function PublicationMedia({ publication, eager }: { publication: Publication; ea
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mobile = window.matchMedia('(max-width: 720px)');
+    const mobile = window.matchMedia('(max-width: 760px)');
     const update = () => setVideoEligible(Boolean(publication.video) && !motion.matches && !mobile.matches);
     update();
     motion.addEventListener('change', update);
