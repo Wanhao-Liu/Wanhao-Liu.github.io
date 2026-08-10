@@ -29,6 +29,7 @@ for (const signal of [
   'visitor-map',
   'id="about"',
   'Selected Publications',
+  'https://jinsonglin-cuhk.github.io/renlab-project-homepages/EndoWAM/#viewpoint-invariance',
 ]) {
   if (!english.includes(signal)) throw new Error(`English homepage missing: ${signal}`);
 }
