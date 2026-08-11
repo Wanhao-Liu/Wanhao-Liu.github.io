@@ -7,7 +7,7 @@ const parsed = parse(source);
 if (parsed.errors.length) throw new Error(`BibTeX parse errors: ${JSON.stringify(parsed.errors)}`);
 const entries = parsed.entries;
 
-if (entries.length !== 8) throw new Error(`Expected 8 publications, found ${entries.length}.`);
+if (entries.length !== 9) throw new Error(`Expected 9 publications, found ${entries.length}.`);
 
 for (const entry of entries) {
   const fields = entry.fields;

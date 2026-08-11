@@ -61,9 +61,31 @@ if (!selectedPublications.includes('https://jinsonglin-cuhk.github.io/renlab-pro
 if (selectedPublications.includes('NCGR: Noise-Conditional Gated Rectification for Camera Extrinsic Perturbations in BEV 3D Object Detection')) {
   throw new Error('NCGR must not appear on the Selected Publications page.');
 }
-for (const signal of ['2608.06770', '2608.03895', '2608.03211', '2608.01221', 'Surg-UniWorld/poster.png', '<details']) {
+const surgLatTitle = 'SurgLAT: Surgical Latent Attention Tracking for Depth-Aware Robotic Laparoscope Control';
+if (selectedPublications.includes(surgLatTitle)) throw new Error('SurgLAT must not appear on the Selected Publications page.');
+if ((selectedPublications.match(/class="publication-row"/g) ?? []).length !== 4) throw new Error('Selected Publications must contain exactly four works.');
+for (const signal of [
+  surgLatTitle,
+  '2608.07876',
+  'https://surglat-home-page.pages.dev/',
+  'SurgLAT/pipeline.png',
+  '<span>Rulin Zhou</span><sup>#</sup>',
+  '<span>Qiujie Song</span><sup>#</sup>',
+  '<span>Yujie Ma</span><sup>#</sup>',
+  '<span>Hongliang Ren</span><sup>*</sup>',
+  '2608.06770',
+  '2608.03895',
+  '2608.03211',
+  '2608.01221',
+  'Surg-UniWorld/poster.png',
+  '<details',
+]) {
   if (!publications.includes(signal)) throw new Error(`Publications page missing: ${signal}`);
 }
+if (publications.indexOf(surgLatTitle) > publications.indexOf('Surg-UniWorld: A Unified Surgical World Model with Multimodal Control Experts')) {
+  throw new Error('SurgLAT must be the first publication.');
+}
+if ((publications.match(/class="publication-row"/g) ?? []).length !== 9) throw new Error('Publications page must contain exactly nine works.');
 for (const signal of ['lang="zh-CN"', '"@type":"ScholarlyArticle"', 'property="og:locale" content="zh_CN"']) {
   if (!chinesePublications.includes(signal)) throw new Error(`Chinese publications page missing: ${signal}`);
 }
