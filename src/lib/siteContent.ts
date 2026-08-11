@@ -25,6 +25,18 @@ export interface NewsItem {
   content: string;
 }
 
+export interface AwardItem {
+  title: string;
+  organization: string;
+  period: string;
+  detail?: string;
+}
+
+export interface AwardsContent {
+  academic: AwardItem[];
+  competitions: AwardItem[];
+}
+
 export interface ProjectItem {
   title: string;
   period: string;
@@ -46,6 +58,12 @@ export function getAbout(locale: Locale): AboutContent {
 
 export function getNews(locale: Locale): NewsItem[] {
   return getTomlContent<{ news: NewsItem[] }>('news.toml', locale)?.news ?? [];
+}
+
+export function getAwards(locale: Locale): AwardsContent {
+  const content = getTomlContent<AwardsContent>('awards.toml', locale);
+  if (!content) throw new Error(`Missing awards content for ${locale}`);
+  return content;
 }
 
 export function getProjects(locale: Locale): ProjectItem[] {

@@ -16,6 +16,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
   const persistLocale = (targetLocale: Locale) => () => localStorage.setItem('locale', targetLocale);
   const links = [
     { href: `/${locale}/`, label: labels.about },
+    { href: `/${locale}/selected-publications/`, label: labels.selectedPublications },
     { href: `/${locale}/publications/`, label: labels.publications },
     { href: `/${locale}/projects/`, label: labels.projects },
     { href: '/cv/Wanhao_Liu_CV.pdf', label: labels.cv, external: true },

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import AcademicHome from '@/components/home/AcademicHome';
-import { getAbout, getNews, getPublications, isLocale, locales } from '@/lib/siteContent';
+import { getAbout, getAwards, getNews, isLocale, locales } from '@/lib/siteContent';
 
 export const dynamicParams = false;
 export function generateStaticParams() { return locales.map((locale) => ({ locale })); }
@@ -27,5 +27,5 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     affiliation: [{ '@type': 'CollegeOrUniversity', name: 'Guangdong University of Technology' }, { '@type': 'CollegeOrUniversity', name: 'The Chinese University of Hong Kong' }],
     sameAs: ['https://github.com/Wanhao-Liu', 'https://scholar.google.com/citations?hl=en&user=zaRHAjgAAAAJ'],
   };
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /><AcademicHome locale={locale} about={getAbout(locale)} news={getNews(locale)} publications={getPublications(locale)} /></>;
+  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /><AcademicHome locale={locale} about={getAbout(locale)} news={getNews(locale)} awards={getAwards(locale)} /></>;
 }

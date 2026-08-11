@@ -26,7 +26,8 @@ describe('SiteHeader', () => {
   it('matches the reference navigation and segmented locale control', () => {
     const { container } = render(<SiteHeader locale="en" />);
 
-    expect(screen.getByRole('link', { name: 'Publications' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Selected Publications' })).toHaveAttribute('href', '/en/selected-publications');
+    expect(screen.getByRole('link', { name: 'Publications' })).toHaveAttribute('href', '/en/publications');
     expect(container.querySelector('.locale-switch')).toBeInTheDocument();
     expect(screen.getAllByText('EN').length).toBeGreaterThan(0);
     expect(screen.getAllByRole('link', { name: 'Switch to Chinese' }).length).toBeGreaterThan(0);
