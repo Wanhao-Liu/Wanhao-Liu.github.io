@@ -1,5 +1,5 @@
-intro = "I am a B.Eng. student in Electronic Science and Technology at Guangdong University of Technology, advised by Prof. Panshuo Li. I am also a Research Assistant at The Chinese University of Hong Kong, working with Prof. Hongliang Ren."
-research = "My research lies at the intersection of embodied intelligence, robot learning, and medical robot autonomy. I develop Vision-Language-Action and World-Action Models that connect multimodal perception, predictive world modeling, and visuomotor control for robust robotic decision-making. My current work focuses on surgical video prediction, grounded endoscopic navigation, and executable world-action modeling for robot-assisted endoscopic intervention."
+intro = "I am a B.Eng. student in Electronic Science and Technology at Guangdong University of Technology, advised by Prof. Panshuo Li, and a Research Assistant at The Chinese University of Hong Kong working with Prof. Hongliang Ren."
+research = "My research focuses on embodied intelligence and medical robotics, particularly Vision-Language-Action and World-Action Models for surgical video prediction, endoscopic navigation, and robot-assisted intervention."
 interests = ["Embodied Intelligence", "Robot Learning", "Medical Robotics", "Vision-Language-Action Models", "World-Action Models", "Visuomotor Control"]
 
 [[education]]
