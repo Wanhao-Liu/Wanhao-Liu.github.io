@@ -4,7 +4,7 @@ const labels = {
   en: {
     about: 'About', publications: 'Publications', projects: 'Projects', cv: 'CV',
     researchInterests: 'Research Interests', education: 'Education', experience: 'Experience',
-    news: 'Recent News', awards: 'Awards', academicHonors: 'Academic Honors', competitions: 'Competitions', selectedPublications: 'Selected Publications', viewAll: 'View all publications',
+    news: 'Recent News', awards: 'Awards', academicHonors: 'Academic Honors', competitions: 'Competitions', academicService: 'Academic Service', journalReviewing: 'Journal Reviewing', conferenceReviewing: 'Conference Reviewing', selectedPublications: 'Selected Publications', viewAll: 'View all publications',
     equal: 'Equal contribution', corresponding: 'Corresponding author', abstract: 'Abstract',
     webpage: 'Webpage', pdf: 'PDF', arxiv: 'arXiv', code: 'Code', doi: 'DOI',
     search: 'Search publications', allYears: 'All years', allTypes: 'All types', allTopics: 'All topics',
@@ -15,7 +15,7 @@ const labels = {
   zh: {
     about: '关于', publications: '论文', projects: '项目', cv: '简历',
     researchInterests: '研究方向', education: '教育经历', experience: '研究经历',
-    news: '最近动态', awards: '获奖荣誉', academicHonors: '学术荣誉', competitions: '竞赛获奖', selectedPublications: '精选论文', viewAll: '查看全部论文',
+    news: '最近动态', awards: '获奖荣誉', academicHonors: '学术荣誉', competitions: '竞赛获奖', academicService: '学术服务', journalReviewing: '期刊审稿', conferenceReviewing: '会议审稿', selectedPublications: '精选论文', viewAll: '查看全部论文',
     equal: '共同第一作者', corresponding: '通讯作者', abstract: '摘要',
     webpage: '主页', pdf: 'PDF', arxiv: 'arXiv', code: '代码', doi: 'DOI',
     search: '搜索论文', allYears: '全部年份', allTypes: '全部类型', allTopics: '全部方向',

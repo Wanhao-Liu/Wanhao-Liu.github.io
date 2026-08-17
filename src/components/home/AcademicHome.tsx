@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { Microscope, Newspaper, UserRound } from 'lucide-react';
-import type { Locale, AboutContent, AwardsContent, NewsItem } from '@/lib/siteContent';
+import type { Locale, AboutContent, AcademicServiceContent, AwardsContent, NewsItem } from '@/lib/siteContent';
 import { getLabels } from '@/lib/labels';
+import AcademicServiceSection from '@/components/home/AcademicServiceSection';
 import AwardsSection from '@/components/home/AwardsSection';
 import ProfileSidebar from '@/components/home/ProfileSidebar';
 
-export default function AcademicHome({ locale, about, news, awards }: { locale: Locale; about: AboutContent; news: NewsItem[]; awards: AwardsContent }) {
+export default function AcademicHome({ locale, about, news, awards, academicService }: { locale: Locale; about: AboutContent; news: NewsItem[]; awards: AwardsContent; academicService: AcademicServiceContent }) {
   const labels = getLabels(locale);
   const zh = locale === 'zh';
   const researchThemes = zh ? [
@@ -45,6 +46,7 @@ export default function AcademicHome({ locale, about, news, awards }: { locale: 
           </section>
 
           <AwardsSection locale={locale} awards={awards} />
+          <AcademicServiceSection locale={locale} service={academicService} />
         </div>
       </div>
     </div>

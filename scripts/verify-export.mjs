@@ -34,6 +34,12 @@ for (const signal of [
   'Academic Honors',
   'Outstanding Student Leader Award',
   'National Second Prize',
+  'Academic Service',
+  'Journal Reviewing',
+  'Conference Reviewing',
+  'IEEE Transactions on Mobile Computing (TMC)',
+  'IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)',
+  'International Conference on Autonomous Agents and Multiagent Systems (AAMAS)',
   'My research focuses on embodied intelligence and medical robotics, particularly Vision-Language-Action and World-Action Models for surgical video prediction, endoscopic navigation, and robot-assisted intervention.',
   '/images/LWH-2026.jpg',
 ]) {
@@ -42,7 +48,7 @@ for (const signal of [
 if (!english.includes('<a href="/en/publications/">Publications</a>')) throw new Error('English navigation is not labeled Publications.');
 if (!english.includes('<a href="/en/selected-publications/">Selected Publications</a>')) throw new Error('English navigation is missing Selected Publications.');
 if (english.includes('class="home-section home-publications"')) throw new Error('Homepage still renders publication rows.');
-for (const signal of ['刘皖皓', '研究方向', '获奖荣誉', '优秀学生干部', '全国二等奖', '我的研究聚焦于具身智能与医疗机器人，重点研究用于手术视频预测、内窥镜导航和机器人辅助介入的视觉-语言-动作模型与世界动作模型。', '/zh/publications/', '/en/']) {
+for (const signal of ['刘皖皓', '研究方向', '获奖荣誉', '优秀学生干部', '全国二等奖', '学术服务', '期刊审稿', '会议审稿', '我的研究聚焦于具身智能与医疗机器人，重点研究用于手术视频预测、内窥镜导航和机器人辅助介入的视觉-语言-动作模型与世界动作模型。', '/zh/publications/', '/en/']) {
   if (!chinese.includes(signal)) throw new Error(`Chinese homepage missing: ${signal}`);
 }
 const selectedTitles = [

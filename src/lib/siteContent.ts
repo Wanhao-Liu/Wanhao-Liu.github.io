@@ -37,6 +37,15 @@ export interface AwardsContent {
   competitions: AwardItem[];
 }
 
+export interface AcademicServiceItem {
+  name: string;
+}
+
+export interface AcademicServiceContent {
+  journals: AcademicServiceItem[];
+  conferences: AcademicServiceItem[];
+}
+
 export interface ProjectItem {
   title: string;
   period: string;
@@ -63,6 +72,12 @@ export function getNews(locale: Locale): NewsItem[] {
 export function getAwards(locale: Locale): AwardsContent {
   const content = getTomlContent<AwardsContent>('awards.toml', locale);
   if (!content) throw new Error(`Missing awards content for ${locale}`);
+  return content;
+}
+
+export function getAcademicService(locale: Locale): AcademicServiceContent {
+  const content = getTomlContent<AcademicServiceContent>('academic-service.toml', locale);
+  if (!content) throw new Error(`Missing academic service content for ${locale}`);
   return content;
 }
 

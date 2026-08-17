@@ -23,9 +23,17 @@ const awards = {
   ],
 };
 
+const academicService = {
+  journals: [{ name: 'IEEE Transactions on Mobile Computing (TMC)' }],
+  conferences: [
+    { name: 'IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)' },
+    { name: 'International Conference on Autonomous Agents and Multiagent Systems (AAMAS)' },
+  ],
+};
+
 describe('AcademicHome', () => {
   it('uses the reference profile and content grid', () => {
-    const { container } = render(<AcademicHome locale="en" about={about} news={[{ date: '2026-08', content: 'New paper released.' }]} awards={awards} />);
+    const { container } = render(<AcademicHome locale="en" about={about} news={[{ date: '2026-08', content: 'New paper released.' }]} awards={awards} academicService={academicService} />);
 
     expect(container.querySelector('.home-grid')).toBeInTheDocument();
     expect(screen.getByRole('complementary', { name: 'Wanhao Liu profile' })).toBeInTheDocument();
@@ -37,6 +45,12 @@ describe('AcademicHome', () => {
     expect(screen.getByRole('heading', { name: 'Competitions' })).toBeInTheDocument();
     expect(screen.getByText('Outstanding Student Leader Award')).toBeInTheDocument();
     expect(screen.getByText('National Second Prize')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Academic Service' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Journal Reviewing' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Conference Reviewing' })).toBeInTheDocument();
+    expect(screen.getByText('IEEE Transactions on Mobile Computing (TMC)')).toBeInTheDocument();
+    expect(screen.getByText('IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)')).toBeInTheDocument();
+    expect(screen.getByText('International Conference on Autonomous Agents and Multiagent Systems (AAMAS)')).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Selected Publications' })).not.toBeInTheDocument();
     expect(container.querySelector('.home-publications')).not.toBeInTheDocument();
     expect(screen.getByText('Medical robotics research')).toBeInTheDocument();
