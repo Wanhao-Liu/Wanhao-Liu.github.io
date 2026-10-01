@@ -87,7 +87,7 @@ const newWorks = [
   {
     title: selectedTitles[3],
     authors: ['Liangjing Shao', 'Wanhao Liu', 'Zhiwei Fang', 'Rulin Zhou', 'Quanlu Zhang', 'Changjing Liu', 'Beilei Cui', 'Yiming Huang', 'Hongliang Ren'],
-    signals: ['href="https://ropeflow.netlify.app/"', 'RoPE-Flow/poster.webp', 'ICLR 2027 Conference Submission', '<span>Hongliang Ren</span><sup>*</sup>'],
+    signals: ['href="https://ropeflow.netlify.app/"', 'RoPE-Flow/poster.webp', '<span>Hongliang Ren</span><sup>*</sup>'],
     video: 'https://ropeflow.netlify.app/static/videos/teaser_video.mp4',
   },
 ];
@@ -95,6 +95,7 @@ for (const html of [selectedPublications, chineseSelectedPublications, publicati
   for (const work of newWorks) {
     const row = publicationRows(html).find((item) => item.includes(work.title));
     if (!row) throw new Error(`Missing new publication: ${work.title}`);
+    if (!row.includes('<p class="publication-venue">arXiv preprint')) throw new Error(`${work.title}: incorrect venue label.`);
     for (const signal of work.signals) {
       if (!row.includes(signal)) throw new Error(`${work.title}: missing ${signal}`);
     }

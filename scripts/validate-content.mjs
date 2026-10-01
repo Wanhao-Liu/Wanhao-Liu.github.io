@@ -31,7 +31,6 @@ const requiredSignals = [
   'Wanhao Liu# and Rulin Zhou# and Liangjing Shao#',
   'Liangjing Shao and Wanhao Liu and Zhiwei Fang',
   'Dongyue Li and Jinsong Lin and Zhiqing Tang',
-  'ICLR 2027 Conference Submission',
   'https://wanhao-liu.github.io/Surgcast/static/videos/overview/surgcast-overview.mp4?v=20260926-silent',
   'https://ropeflow.netlify.app/static/videos/teaser_video.mp4',
   'Rulin Zhou# and Wanhao Liu#',
