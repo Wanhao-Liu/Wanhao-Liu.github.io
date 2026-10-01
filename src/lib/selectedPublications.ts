@@ -1,8 +1,10 @@
 import type { Publication } from '@/types/publication';
 
 export const selectedPublicationOrder = [
+  'liu2026surgcast',
   'liu2026crossscope',
   'liu2026acmasac',
+  'shao2026ropeflow',
   'zhou2026surguniworld',
   'lin2026endowam',
 ] as const;
@@ -16,4 +18,3 @@ export function selectPublications(publications: Publication[]): Publication[] {
     return publication ? [publication] : [];
   });
 }
-

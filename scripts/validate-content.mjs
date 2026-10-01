@@ -7,15 +7,18 @@ const parsed = parse(source);
 if (parsed.errors.length) throw new Error(`BibTeX parse errors: ${JSON.stringify(parsed.errors)}`);
 const entries = parsed.entries;
 
-if (entries.length !== 9) throw new Error(`Expected 9 publications, found ${entries.length}.`);
+if (entries.length !== 11) throw new Error(`Expected 11 publications, found ${entries.length}.`);
 
 for (const entry of entries) {
   const fields = entry.fields;
   for (const required of ['title', 'author', 'year', 'abstract']) {
     if (!fields[required] || (typeof fields[required] === 'string' && !fields[required].trim())) throw new Error(`${entry.key}: missing ${required}.`);
   }
-  if (!fields.pdf) throw new Error(`${entry.key}: missing PDF destination.`);
+  if (!fields.pdf && !(fields.status === 'submitted' && fields.webpage)) {
+    throw new Error(`${entry.key}: missing PDF destination (submitted work may link to its project page).`);
+  }
   if (!fields.preview && !fields.video) throw new Error(`${entry.key}: missing publication media.`);
+  if (fields.video && !fields.poster && !fields.preview) throw new Error(`${entry.key}: missing video fallback image.`);
   for (const mediaField of ['preview', 'poster']) {
     if (fields[mediaField]) {
       const mediaPath = path.join(root, 'public', 'images', fields[mediaField]);
@@ -25,6 +28,12 @@ for (const entry of entries) {
 }
 
 const requiredSignals = [
+  'Wanhao Liu# and Rulin Zhou# and Liangjing Shao#',
+  'Liangjing Shao and Wanhao Liu and Zhiwei Fang',
+  'Dongyue Li and Jinsong Lin and Zhiqing Tang',
+  'ICLR 2027 Conference Submission',
+  'https://wanhao-liu.github.io/Surgcast/static/videos/overview/surgcast-overview.mp4?v=20260926-silent',
+  'https://ropeflow.netlify.app/static/videos/teaser_video.mp4',
   'Rulin Zhou# and Wanhao Liu#',
   'Wenbin Pan# and Wanhao Liu#',
   'Wanhao Liu# and Jinsong Lin# and Rulin Zhou# and Chi Kit Ng#',

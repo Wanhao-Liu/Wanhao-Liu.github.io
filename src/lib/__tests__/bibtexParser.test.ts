@@ -2,6 +2,23 @@ import { describe, expect, it } from 'vitest';
 import { parseBibTeX } from '@/lib/bibtexParser';
 
 describe('parseBibTeX publication resources', () => {
+  it('preserves submitted status and second-author order without inventing a PDF link', () => {
+    const [publication] = parseBibTeX(`
+      @unpublished{submission,
+        title={Submitted Robot Pose Paper},
+        author={Liangjing Shao and Wanhao Liu and Hongliang Ren*},
+        year={2026},
+        status={submitted},
+        webpage={https://example.com/project}
+      }
+    `);
+
+    expect(publication.status).toBe('submitted');
+    expect(publication.authors[1]).toMatchObject({ name: 'Wanhao Liu', isHighlighted: true, isCoAuthor: false });
+    expect(publication.authors[2].isCorresponding).toBe(true);
+    expect(publication.pdfUrl).toBeUndefined();
+  });
+
   it('preserves webpage, pdf, arXiv, and video preview fields', () => {
     const [publication] = parseBibTeX(`
       @misc{demo,
