@@ -51,6 +51,17 @@ for (const signal of [
 if (!english.includes('<a href="/en/publications/">Publications</a>')) throw new Error('English navigation is not labeled Publications.');
 if (!english.includes('<a href="/en/selected-publications/">Selected Publications</a>')) throw new Error('English navigation is missing Selected Publications.');
 if (english.includes('class="home-section home-publications"')) throw new Error('Homepage still renders publication rows.');
+for (const [html, title, organization, period, detail] of [
+  [english, 'National Scholarship', 'Ministry of Education of China', 'Sep 2025 - Sep 2026', 'Top 0.3%'],
+  [chinese, '国家奖学金', '中华人民共和国教育部', '2025年9月 - 2026年9月', '前 0.3%'],
+]) {
+  const awardSection = html.match(/<section id="awards"[\s\S]*?<\/ul>/)?.[0] ?? '';
+  const award = [...awardSection.matchAll(/<li>([\s\S]*?)<\/li>/g)].map((match) => match[1]).find((row) => row.includes(`<strong>${title}</strong>`));
+  if (!award) throw new Error(`Homepage academic honors missing: ${title}`);
+  for (const signal of [organization, period, detail]) {
+    if (!award.includes(signal)) throw new Error(`${title}: missing ${signal}`);
+  }
+}
 for (const signal of ['刘皖皓', '研究方向', '获奖荣誉', '优秀学生干部', '全国二等奖', '学术服务', '期刊审稿', '会议审稿', '我的研究聚焦于具身智能与医疗机器人，重点研究用于手术视频预测、内窥镜导航和机器人辅助介入的视觉-语言-动作模型与世界动作模型。', 'SurgCast 与 RoPE-Flow 的项目主页已加入精选论文。', '2026年10月', '/zh/publications/', '/en/']) {
   if (!chinese.includes(signal)) throw new Error(`Chinese homepage missing: ${signal}`);
 }
