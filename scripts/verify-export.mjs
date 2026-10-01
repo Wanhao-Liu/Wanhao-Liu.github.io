@@ -51,6 +51,15 @@ for (const signal of [
 if (!english.includes('<a href="/en/publications/">Publications</a>')) throw new Error('English navigation is not labeled Publications.');
 if (!english.includes('<a href="/en/selected-publications/">Selected Publications</a>')) throw new Error('English navigation is missing Selected Publications.');
 if (english.includes('class="home-section home-publications"')) throw new Error('Homepage still renders publication rows.');
+for (const [html, date, content] of [
+  [english, 'Sep 2026', 'Received the National Scholarship (Top 0.3%) from the Ministry of Education of China for the 2025–2026 academic year.'],
+  [chinese, '2026年9月', '获得中华人民共和国教育部颁发的 2025–2026 学年国家奖学金（前 0.3%）。'],
+]) {
+  const newsSection = html.match(/<section id="news"[\s\S]*?<\/section>/)?.[0] ?? '';
+  if (!newsSection.includes(`<time>${date}</time><p>${content}</p>`)) {
+    throw new Error(`Homepage News missing National Scholarship announcement: ${date}`);
+  }
+}
 for (const [html, title, organization, period, detail] of [
   [english, 'National Scholarship', 'Ministry of Education of China', 'Sep 2025 - Sep 2026', 'Top 0.3%'],
   [chinese, '国家奖学金', '中华人民共和国教育部', '2025年9月 - 2026年9月', '前 0.3%'],
