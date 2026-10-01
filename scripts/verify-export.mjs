@@ -127,10 +127,28 @@ if (publications.indexOf(surgLatTitle) > publications.indexOf('Surg-UniWorld: A 
   throw new Error('SurgLAT must precede Surg-UniWorld.');
 }
 for (const html of [publications, chinesePublications]) {
-  if (publicationRows(html).length !== 11) throw new Error('Publications must contain eleven works in both languages.');
+  if (publicationRows(html).length !== 12) throw new Error('Publications must contain twelve works in both languages.');
   if (!publicationRows(html)[0].includes(selectedTitles[0])) throw new Error('SurgCast must be the first full-list publication.');
 }
-for (const poster of ['SurgCast/poster.webp', 'RoPE-Flow/poster.webp']) {
+const flowModeTitle = 'FlowMoDE: Coarse-to-fine Flow Matching for Structure-aware Sim-to-Real Monocular Depth Estimation';
+for (const html of [publications, chinesePublications]) {
+  const row = publicationRows(html).find((item) => item.includes(flowModeTitle));
+  if (!row) throw new Error('FlowMoDE is missing from the full publication list.');
+  for (const signal of ['href="https://flowmode-shao.netlify.app/"', 'FlowMoDE/poster.webp', '<p class="publication-venue">Submitted to ICRA 2027', '2026', '<span>Hongliang Ren</span><sup>*</sup>']) {
+    if (!row.includes(signal)) throw new Error(`FlowMoDE: missing ${signal}`);
+  }
+  const authorMarkup = row.match(/<p class="publication-authors">([\s\S]*?)<\/p>/)?.[1] ?? '';
+  const authors = [...authorMarkup.matchAll(/<span(?: class="me")?>([^<]+)<\/span>/g)].map((match) => match[1]);
+  if (JSON.stringify(authors) !== JSON.stringify(['Liangjing Shao', 'Wanhao Liu', 'Jinsong Lin', 'Zhiwei Fang', 'Hongliang Ren'])) {
+    throw new Error('FlowMoDE: incorrect author order or spelling.');
+  }
+  if (!html.includes('https://flowmode-shao.netlify.app/static/videos/demo.mp4')) throw new Error('FlowMoDE: missing video in client data.');
+  if (row.includes('arxiv.org')) throw new Error('FlowMoDE must not include a placeholder arXiv or PDF link.');
+}
+for (const html of [selectedPublications, chineseSelectedPublications]) {
+  if (publicationRows(html).some((row) => row.includes(flowModeTitle))) throw new Error('FlowMoDE must not change the six requested selections.');
+}
+for (const poster of ['SurgCast/poster.webp', 'RoPE-Flow/poster.webp', 'FlowMoDE/poster.webp']) {
   if (!fs.existsSync(path.join(root, 'out', 'images', poster))) throw new Error(`Missing exported video fallback: ${poster}`);
 }
 for (const signal of ['lang="zh-CN"', '"@type":"ScholarlyArticle"', 'property="og:locale" content="zh_CN"']) {

@@ -7,7 +7,7 @@ const parsed = parse(source);
 if (parsed.errors.length) throw new Error(`BibTeX parse errors: ${JSON.stringify(parsed.errors)}`);
 const entries = parsed.entries;
 
-if (entries.length !== 11) throw new Error(`Expected 11 publications, found ${entries.length}.`);
+if (entries.length !== 12) throw new Error(`Expected 12 publications, found ${entries.length}.`);
 
 for (const entry of entries) {
   const fields = entry.fields;
@@ -33,6 +33,8 @@ const requiredSignals = [
   'Dongyue Li and Jinsong Lin and Zhiqing Tang',
   'https://wanhao-liu.github.io/Surgcast/static/videos/overview/surgcast-overview.mp4?v=20260926-silent',
   'https://ropeflow.netlify.app/static/videos/teaser_video.mp4',
+  'Liangjing Shao and Wanhao Liu and Jinsong Lin and Zhiwei Fang and Hongliang Ren*',
+  'https://flowmode-shao.netlify.app/static/videos/demo.mp4',
   'Rulin Zhou# and Wanhao Liu#',
   'Wenbin Pan# and Wanhao Liu#',
   'Wanhao Liu# and Jinsong Lin# and Rulin Zhou# and Chi Kit Ng#',
